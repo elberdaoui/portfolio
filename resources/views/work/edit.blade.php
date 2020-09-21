@@ -2,11 +2,35 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Create a Work</title>
+    <title>Edit</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+    @include(backpack_view('inc.head'))
   </head>
-  <body class="bg-light">
-    <h2 class="text-secondary mt-5 text-center">Add a Work</h2>
+
+  <body class="{{ config('backpack.base.body_class') }}">
+    @include(backpack_view('inc.main_header'))
+    <div class="app-body">
+      @include(backpack_view('inc.sidebar'))
+
+      <main class="main pt-2">
+
+         @yield('before_breadcrumbs_widgets')
+
+         @includeWhen(isset($breadcrumbs), backpack_view('inc.breadcrumbs'))
+
+         @yield('after_breadcrumbs_widgets')
+
+         @yield('header')
+
+         <div class="container-fluid animated fadeIn">
+
+           @yield('before_content_widgets')
+
+           @yield('content')
+
+           @yield('after_content_widgets')
+
+    <h2 class=" mb-5 text-center" style="color: #4070F4;">Edit a Work</h2>
     <form action="{{url('/work/'.$work->id)}}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PUT')
@@ -29,12 +53,24 @@
           </div>
           <input type="file" value="{{$work->image}}" class="form-control" name="image" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Modify</button>
+            <button class="btn btn-outline-primary" type="submit" id="button-addon2">Modify</button>
           </div>
         </div>
       </div>
 
     </form>
     </div>
+  <!-- </div> -->
+
+  </main>
+
+</div><!-- ./app-body -->
+@yield('before_scripts')
+@stack('before_scripts')
+
+@include(backpack_view('inc.scripts'))
+
+@yield('after_scripts')
+@stack('after_scripts')
   </body>
 </html>
