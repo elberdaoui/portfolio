@@ -1,13 +1,37 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Bricileurs</title>
+    <title>Educations</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/brico.css') }}">
+    @include(backpack_view('inc.head'))
   </head>
-  <body class="bg-light">
-    <h2 class="text-secondary mb-5 text-center">Educations</h2>
+@if (backpack_auth()->check())
+  <body class="{{ config('backpack.base.body_class') }}">
+    @include(backpack_view('inc.main_header'))
+    <div class="app-body">
+      @include(backpack_view('inc.sidebar'))
+
+      <main class="main pt-2">
+
+         @yield('before_breadcrumbs_widgets')
+
+         @includeWhen(isset($breadcrumbs), backpack_view('inc.breadcrumbs'))
+
+         @yield('after_breadcrumbs_widgets')
+
+         @yield('header')
+
+         <div class="container-fluid animated fadeIn">
+
+           @yield('before_content_widgets')
+
+           @yield('content')
+
+           @yield('after_content_widgets')
+
+    <h2 class=" mb-5 text-center" style="color: #4070F4;">Educations</h2>
     <table class="table table-striped">
       <thead>
         <tr id="myth">
@@ -42,7 +66,27 @@
 </table>
 <div class="text-center">
 
-  <a type="button" class="btn bg-secondary mt-3 px-5" href="{{url('education/create')}}">Add an education</a>
+  <a type="button" class="btn bg-primary mt-3 px-5" href="{{url('education/create')}}">Add an education</a>
 </div>
+</div>
+
+</main>
+
+</div><!-- ./app-body -->
+@else (!backpack_auth()->check())
+
+
+<blockquote class="blockquote text-center">
+<p class="mb-0">You are not allowed to navigate here</p>
+<footer class="blockquote-footer">Admin section <cite title="Source Title"></cite></footer>
+</blockquote>
+@endif
+@yield('before_scripts')
+@stack('before_scripts')
+
+@include(backpack_view('inc.scripts'))
+
+@yield('after_scripts')
+@stack('after_scripts')
 </body>
 </html>

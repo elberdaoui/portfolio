@@ -1,0 +1,11 @@
+<?php
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+{{ imports }}
+
+$factory->define({{ class }}::class, function (Faker $faker) {
+    return [
+        {{ definition }}
+    ];
+});

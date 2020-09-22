@@ -42,18 +42,18 @@
           </div>
         </form>
     </div>
-    @if (backpack_user()->hasRole('admin'))
-    <div class="ml-5">
+
+    <!-- <div class="ml-5">
 
       <a type="button" class="btn bg-primary mt-5 px-5" href="{{ backpack_url('dashboard') }}">Back to Dashboard</a>
-    </div>
-    @else (!backpack_user()->hasRole('admin'))
+    </div> -->
+
     <div class="ml-5">
 
       <a type="button" class="btn bg-primary mt-5 px-5" href="{{ url('/') }}">Back to Dashboard</a>
 
     </div>
-    @endif
+    
   </section>
 
   </body>

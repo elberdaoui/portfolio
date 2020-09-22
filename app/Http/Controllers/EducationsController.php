@@ -96,7 +96,7 @@ class EducationsController extends Controller
      * @param  \App\educations  $educations
      * @return \Illuminate\Http\Response
      */
-    public function destroy(educations $educations)
+    public function destroy($id)
     {
       $education = educations::find($id);
       $education->delete();
