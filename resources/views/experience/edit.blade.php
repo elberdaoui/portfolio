@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
     @include(backpack_view('inc.head'))
   </head>
+  @if (backpack_auth()->check())
 
   <body class="{{ config('backpack.base.body_class') }}">
     @include(backpack_view('inc.main_header'))
@@ -71,6 +72,14 @@
   </main>
 
   </div><!-- ./app-body -->
+  @else (!backpack_auth()->check())
+
+
+  <blockquote class="blockquote text-center">
+  <p class="mb-0">You are not allowed to navigate here</p>
+  <footer class="blockquote-footer">Admin section <cite title="Source Title"></cite></footer>
+  </blockquote>
+  @endif
   @yield('before_scripts')
   @stack('before_scripts')
 
